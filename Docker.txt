@@ -65,3 +65,22 @@ Docker containers
 		
 Assignment: work with docker commands
 			Try to create a jenkins container (jenkins/jenkins:lts)
+			
+Custom Docker Image / Dockerfile 
+	- Dockerfile is used to create custom image on top stock image or any other image as base image.
+	
+	FROM 
+		- FROM must be the first non-command instruction in the Dockerfile.
+		- FROM is used to specify the base image on top of this image all the next instructions will be executed.
+		
+		FROM <image_name>:<tag>
+	
+	COPY and ADD 
+		- Both copy and add instruction is used to copy files and directories from host machine to the image.
+		- The source path to copy files should always be evaluted with reference to Dockerfile.
+		
+		ADD supports extra source formats 
+			- If the source is a compressed file add will automatically 
+			  uncompresses it to the destination.
+			- If the source is a link to a downloadable file it will download 
+			  to the destination.			  
