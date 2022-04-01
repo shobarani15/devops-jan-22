@@ -10,7 +10,7 @@ Kubernetes Installation
 	7. sudo apt-get install -y docker.io
 	8. sudo systemctl start docker
 	9. sudo systemctl enable docker.service
-	
+	  sudo apt-get install -y kubelet kubeadm kubectl kubernetes-cni
 	10. Create a ami from above instance to create workernodes 
 	
 	11. After ami is available, login again to master node 
