@@ -92,10 +92,7 @@ kubernetes Architecture
               distributed work and basically complete cluster information.			
 			
 		3. scheduler / kube-scheduler
-			- The scheduler always watches for a new pod request and 
-			  decides which worker node this pod should be created.
-			- Based on the worker node load, affinity and anti-affiny, taint configuration 
-			  pod will be scheduled to a particualr node.
-			  
+			- The scheduler always watches for a new container request and 
+			  decides whcih worker node the container should be created.	
 		controller manager 
 		Cloud controller manager 
