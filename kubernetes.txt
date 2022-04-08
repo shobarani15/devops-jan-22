@@ -424,12 +424,19 @@ Service (svc)
 	- This type of serviec is used by cloud providers and this service is completely depends on cloud providers. 
 	- K8s now proides a better alternative for this service type which is called Ingress.
 
+Assignment: 
 	
 How to use custom images / connect to a registry through k8s 
 	1. Login to the docker hub account 
 		  docker login 
 	2. Create a app to print ip 
-			
-	3. 	
-
+			using flask 
+	3. 	push the image to your registry 
+	4 use the above custom image in k8s spec file.
+	
+		image: <username>/<regirty_name>:<tag>
+		imagePullPolicy: IfNotPresent
+		
+	5. Create a service of type NodePort attaching the above pods 
+		
 			  

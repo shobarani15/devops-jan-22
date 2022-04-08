@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route('/')
 def print_ip(): 
     hostname = socket.gethostname()
-    localip = socker.gethostbyname(hostname)
+    localip = socket.gethostbyname(hostname)
     return localip
     
 if __name__ == "__main__":
