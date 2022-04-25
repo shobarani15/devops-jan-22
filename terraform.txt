@@ -38,7 +38,7 @@ Terraform Provider
 	How to use multiple configurations with same provider block ?
 	How to use a provider with multiple region ? 
 		
-	providel aliases
+	provider aliases
 		- we can define multiple configuration for the same provider and select which provider
 		  to use in resource and other blocks.
 		
@@ -110,21 +110,97 @@ terraform apply
 	  changes will be applied.
 		
 	To apply changes will out user confirmation 
-		terraform apply -auto-approve
+		terraform apply --auto-approve
 	
 	To run a perticular terraform script
 		terraform apply <script>.tf <script1>.tf
 		
 	To apply a plan file
 		terraform apply <plan_file>
-		
-terraform validate 
-	- This is to validate the syntax of the terraform scripts in a project.		
-	
+			
 tarrafotm destroy 
 	- This is used to destroy the resources which are manged by this current terraform 
 	  scripts.
-    - Crate a destroy plan 
-		terraform destroy -target <resource_type>.<resource_name>
-		terraform destroy -target aws_instance.ec2_instance2
+    - Crate a destroy plan
+
+		TO destroy one resource
+			terraform destroy -target <resource_type>.<resource_name>
+			example: terraform destroy -target aws_instance.ec2_ubuntu
+
+terraform validate 
+	- This is to validate the syntax of the terraform scripts in a project.		
 		
+Terraform state 
+	- When 
+	Types of state in terraform 
+		- local 
+			we can keep the state file locally in the same machince where we execute the terraform code.
+		
+		- Remote 
+			also know as backend, Instead of keeping state file in local we can keep it in a remote location 
+			such as s3, etcd, kuberntes, artifactory etc.
+			
+			Benifits
+			  - Safer storage: As state file contains sensitive data, Saving in the remote place we can safe quard the data 
+							   example: in s3 backed we can use encrypted s3 to secure the state file.
+			  - Versioning/Auditing: Invalid access can be identified or can maintain the version on state file.
+			  - Multiple user of same team can apply the changes by sharing the same state file.
+			
+terraform settings 
+	- used for specifying provider requirements 
+	- we can restrict the provider version 
+	- we configure backend in this settings 
+	- we use terraform block 
+	- default file terraform.tf / versions.tf 	
+		
+		terraform {
+			
+		}
+		
+terraform variables and outputs 
+	- Local variables
+		A local valuse assigned to a name, so we can use it multiple times with in the same module 
+		without repeating it.
+		
+			locals {
+				service_name = "gmail"
+				owner = "Kubernetes"
+			}
+		
+	- input variables
+		Input variable serve as parameters for terraform configuration files/modules 
+		main advantage is input variables are used to configure the modules instead of altering the source code 
+		we can pass the input values.
+		To supress the values in the console output use sensitive = true 
+			
+			variable "bucket_name" {
+				type = string
+				sensitive = true
+				default = "s3-backend-bucket-aaaaa-22222"
+			}
+		 
+	- output variables 
+		- output variable are like return values of terraform code.
+		- A child module can use the output of anotehr module as input.
+		- To supress the values in the console output use sensitive = true
+
+			output "ec2_public_ip" {
+				value = aws_instance.new_ec2.public_ip 
+			}
+	
+Modules
+	all the set of terraform configurations (all .tf files) in a folder is called as module 
+	
+	Root Module 
+		- The .tf files iin the working directories is root module 
+		- Where we run terraform init which contains terraform configurations is root module 
+		- Every terraform configuration has to have atleast one module by default it will be root module.
+		
+	Child module 
+		A terraform set of configurations defined in sub folder can be called by other modules (root module)
+		to extend the functionality. 
+		These are usually user defined modules.		
+		
+Assignment: create s3 with versioning enabled and sse of default type.
+				- no value should be hard coded in the resource block.
+				- should print output - s3 buckate name and some 4 details
