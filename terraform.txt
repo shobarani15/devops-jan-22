@@ -208,3 +208,14 @@ Modules
 Assignment: create s3 with versioning enabled and sse of default type.
 				- no value should be hard coded in the resource block.
 				- should print output - s3 buckate name and some 4 details
+				
+taint 
+	
+
+data sources / data resource 
+	
+
+null resource 
+	
+
+	
